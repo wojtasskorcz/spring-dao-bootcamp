@@ -11,7 +11,7 @@ So far you can only change the database dialect editing the file `src/main/resou
 `<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>`
 
 
-IMPORTANT
+**IMPORTANT**  
 Create a file `src/main/resources/properties/database.properties` after pulling. The template for the file is:
 
   jdbc.driverClassName=com.mysql.jdbc.Driver
