@@ -14,7 +14,7 @@ So far you can only change the database dialect editing the file `src/main/resou
 **IMPORTANT**  
 Create a file `src/main/resources/properties/database.properties` after pulling. The template for the file is:
 
-  jdbc.driverClassName=com.mysql.jdbc.Driver
+	jdbc.driverClassName=com.mysql.jdbc.Driver
 	jdbc.dialect=org.hibernate.dialect.MySQLDialect
 	jdbc.databaseurl=jdbc:mysql://localhost:3306/bootcamp
 	jdbc.username=your_db_root
