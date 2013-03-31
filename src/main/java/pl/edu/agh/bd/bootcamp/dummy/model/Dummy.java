@@ -18,23 +18,19 @@ public class Dummy {
 	private String name;
 	
 	@Column
-	private String surname;
-	
-	@Column
 	private Integer age;
 	
 	public Dummy() {
 	}
 	
-	public Dummy(String name, String surname, int age) {
+	public Dummy(String name, int age) {
 		this.name = name;
-		this.surname = surname;
 		this.age = age;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("%s %s (%s)", name, surname, age);
+		return String.format("%s (%s)", name, age);
 	}
 
 	public Long getId() {
@@ -51,14 +47,6 @@ public class Dummy {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
 	}
 
 	public Integer getAge() {

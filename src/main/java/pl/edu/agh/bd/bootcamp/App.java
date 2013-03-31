@@ -16,8 +16,8 @@ public class App {
 		
 		DummyDao dummyDao = (DummyDao)appContext.getBean("dummyDao");
 		
-		Dummy d1 = new Dummy("Wojciech", "Grajewski", 21);
-		Dummy d2 = new Dummy("Piotr", "Bryk", 21);
+		Dummy d1 = new Dummy("Wojciech", 21);
+		Dummy d2 = new Dummy("Piotr", 21);
 		dummyDao.save(d1);
 		dummyDao.save(d2);
 		
