@@ -8,8 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pl.edu.agh.bd.bootcamp.dao.CustomerDao;
 import pl.edu.agh.bd.bootcamp.model.Customer;
 
-public class App {
-
+public class CustomerDaoSample {
 	public static void main(String[] args) {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext(
 				"config/BeanLocations.xml");
