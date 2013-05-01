@@ -24,5 +24,3 @@ The `jdbc.dialect` parameter is so far ignored, I'm working on integrating it in
 Follow the notes above if you use a different database. In this case you also have to add a driver dependency for your database 
 in the `pom.xml` file.
 
-To check the installation correctness just run the application (the `main` method is in the `src/main/java/pl/edu/agh/bd/bootcamp/App.java`)
-
