@@ -6,34 +6,35 @@ import java.util.List;
 import pl.edu.agh.bd.bootcamp.dao.GenericDao;
 import pl.edu.agh.bd.bootcamp.util.CustomHibernateDaoSupport;
 
-public abstract class HibernateGenericDao<T> extends CustomHibernateDaoSupport implements GenericDao<T> {
+public abstract class HibernateGenericDao<T> extends CustomHibernateDaoSupport
+		implements GenericDao<T> {
 
-    private Class<T> type;
+	private Class<T> type;
 
-    public HibernateGenericDao() {
-        Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        type = (Class<T>) pt.getActualTypeArguments()[0];
-    }
+	public HibernateGenericDao() {
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class<T>) pt.getActualTypeArguments()[0];
+	}
 
-    @Override
-    public void save(T t) {
+	@Override
+	public void save(T t) {
 		getHibernateTemplate().save(t);
 	}
 
-    @Override
+	@Override
 	public void update(T t) {
 		getHibernateTemplate().update(t);
 
 	}
 
-    @Override
+	@Override
 	public void delete(T t) {
 		getHibernateTemplate().delete(t);
 
 	}
 
-    @Override
+	@Override
 	public List<T> getAll() {
 		return getHibernateTemplate().loadAll(type);
 	}
