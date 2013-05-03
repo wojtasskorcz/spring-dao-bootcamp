@@ -12,6 +12,7 @@ import pl.edu.agh.bd.bootcamp.model.Customer;
 @Repository("customerDao")
 public class HibernateCustomerDao extends HibernateGenericDao<Customer> implements CustomerDao {
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> getByContactName(String name) {
 		return (List<Customer>) getHibernateTemplate().find("from Customer where contactName = '" + name + "'");
