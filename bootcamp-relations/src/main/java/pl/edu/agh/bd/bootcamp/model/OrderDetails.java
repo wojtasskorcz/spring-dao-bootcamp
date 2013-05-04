@@ -1,47 +1,55 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "OrderDetails")
 public class OrderDetails {
-	private Long orderId;
-	private Long productId;
+	private Product product;
 	private Double unitPrice;
 	private Integer quantity;
 	private Double discount;
+	private Long orderDetailsId;
 
-	public Long getOrderId() {
-		return orderId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
+	public Long getOrderDetailsId() {
+		return orderDetailsId;
 	}
 
-	public Long getProductId() {
-		return productId;
+	@ManyToOne
+	public Product getProduct() {
+		return product;
 	}
 
+	@Column
 	public Integer getQuantity() {
 		return quantity;
 	}
 
+	@Column
 	public Double getUnitPrice() {
 		return unitPrice;
 	}
 
+	@Column
 	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public void setDiscount(Double discount) {
 		this.discount = discount;
-	}
-
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
 	}
 
 	public void setUnitPrice(Double unitPrice) {
@@ -52,4 +60,7 @@ public class OrderDetails {
 		this.quantity = quantity;
 	}
 
+	public void setOrderDetailsId(Long id) {
+		this.orderDetailsId = id;
+	}
 }

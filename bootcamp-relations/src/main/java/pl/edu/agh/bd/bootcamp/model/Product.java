@@ -1,10 +1,19 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product")
 public class Product {
 	private Long productId;
 	private String productName;
-	private Long supplierId;
-	private Long categoryId;
+	// private Long supplierId;
+	// private Long categoryId;
 	private Double quantityPerUnit;
 	private Double unitPrice;
 	private Integer unitsInStock;
@@ -12,83 +21,77 @@ public class Product {
 	private Double reorderLevel;
 	private Boolean discontinued;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-
+	@Column
 	public String getProductName() {
 		return productName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public Long getSupplierId() {
-		return supplierId;
-	}
-
-	public void setSupplierId(Long supplierId) {
-		this.supplierId = supplierId;
-	}
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
+	@Column
 	public Double getQuantityPerUnit() {
 		return quantityPerUnit;
+	}
+
+	@Column
+	public Integer getUnitsInStock() {
+		return unitsInStock;
+	}
+
+	@Column
+	public Double getUnitPrice() {
+		return unitPrice;
+	}
+
+	@Column
+	public Integer getUnitsOnOrder() {
+		return unitsOnOrder;
+	}
+
+	@Column
+	public Boolean getDiscontinued() {
+		return discontinued;
+	}
+
+	@Column
+	public Double getReorderLevel() {
+		return reorderLevel;
 	}
 
 	public void setQuantityPerUnit(Double quantityPerUnit) {
 		this.quantityPerUnit = quantityPerUnit;
 	}
 
-	public Integer getUnitsInStock() {
-		return unitsInStock;
-	}
-
 	public void setUnitsInStock(Integer unitsInStock) {
 		this.unitsInStock = unitsInStock;
 	}
 
-	public Double getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(Double unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
-	public Integer getUnitsOnOrder() {
-		return unitsOnOrder;
-	}
-
-	public void setUnitsOnOrder(Integer unitsOnOrder) {
-		this.unitsOnOrder = unitsOnOrder;
-	}
-
-	public Boolean getDiscontinued() {
-		return discontinued;
+	public void setReorderLevel(Double reorderLevel) {
+		this.reorderLevel = reorderLevel;
 	}
 
 	public void setDiscontinued(Boolean discontinued) {
 		this.discontinued = discontinued;
 	}
 
-	public Double getReorderLevel() {
-		return reorderLevel;
+	public void setUnitsOnOrder(Integer unitsOnOrder) {
+		this.unitsOnOrder = unitsOnOrder;
 	}
 
-	public void setReorderLevel(Double reorderLevel) {
-		this.reorderLevel = reorderLevel;
+	public void setUnitPrice(Double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 }

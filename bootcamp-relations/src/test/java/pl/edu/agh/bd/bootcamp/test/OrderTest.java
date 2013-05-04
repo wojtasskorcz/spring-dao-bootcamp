@@ -9,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.agh.bd.bootcamp.dao.CustomerDao;
 import pl.edu.agh.bd.bootcamp.dao.OrderDao;
+import pl.edu.agh.bd.bootcamp.dao.ProductDao;
 import pl.edu.agh.bd.bootcamp.model.Customer;
 import pl.edu.agh.bd.bootcamp.model.Order;
+import pl.edu.agh.bd.bootcamp.model.OrderDetails;
+import pl.edu.agh.bd.bootcamp.model.Product;
 import pl.edu.agh.bd.bootcamp.util.CustomHibernateTestSupport;
 
 public class OrderTest extends CustomHibernateTestSupport {
@@ -19,6 +22,8 @@ public class OrderTest extends CustomHibernateTestSupport {
 	private CustomerDao customerDao;
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private ProductDao productDao;
 
 	@Before
 	public void setUp() {
@@ -47,5 +52,20 @@ public class OrderTest extends CustomHibernateTestSupport {
 		cust.addOrder(order);
 		customerDao.save(cust);
 		assertEquals(2, orderDao.getAll().size());
+	}
+
+	@Test
+	@Transactional
+	public void testAddOrderDetails() {
+		Order order = new Order();
+		order.setShipName("Warszawa");
+		OrderDetails od = new OrderDetails();
+		Product p = new Product();
+		productDao.save(p);
+		od.setProduct(p);
+		order.addOrderDetails(od);
+		assertEquals(1, productDao.getAll().size());
+		orderDao.save(order);
+		assertEquals(1, productDao.getAll().size());
 	}
 }

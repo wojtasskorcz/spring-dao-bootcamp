@@ -1,12 +1,16 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +28,18 @@ public class Order {
 	private String shipRegion;
 	private String shipPostalCode;
 	private String shipCountry;
+	private List<OrderDetails> orderDetails = new ArrayList<OrderDetails>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	public Long getOrderId() {
 		return orderId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
 	}
 
 	@Column
@@ -143,5 +153,13 @@ public class Order {
 
 	public void setShipAddress(String shipAddress) {
 		this.shipAddress = shipAddress;
+	}
+
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public void addOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails.add(orderDetails);
 	}
 }

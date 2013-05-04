@@ -24,6 +24,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<list>
 				<value>pl.edu.agh.bd.bootcamp.model.Customer</value>
 				<value>pl.edu.agh.bd.bootcamp.model.Order</value>
+				<value>pl.edu.agh.bd.bootcamp.model.OrderDetails</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Product</value>
 			</list>
 		</property>
 
