@@ -2,21 +2,29 @@ package pl.edu.agh.bd.bootcamp.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.agh.bd.bootcamp.dao.CustomerDao;
+import pl.edu.agh.bd.bootcamp.dao.OrderDao;
 import pl.edu.agh.bd.bootcamp.model.Customer;
+import pl.edu.agh.bd.bootcamp.model.Order;
 import pl.edu.agh.bd.bootcamp.util.CustomHibernateTestSupport;
 
 public class CustomerTest extends CustomHibernateTestSupport {
 
 	@Autowired
 	private CustomerDao customerDao;
+	@Autowired
+	private OrderDao orderDao;
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Before
 	public void setUp() {
@@ -75,4 +83,28 @@ public class CustomerTest extends CustomHibernateTestSupport {
 		assertEquals(wojciech2.getCustomerId(), newWojciech.getCustomerId());
 	}
 
+	@Test
+	@Transactional
+	public void testCascadeSave() {
+		assertEquals(0, orderDao.getAll().size());
+		Customer c2 = new Customer();
+		c2.setContactName("Klaudia");
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(new Order());
+		c2.setOrders(orders);
+		customerDao.save(c2);
+		assertEquals(1, orderDao.getAll().size());
+	}
+
+	@Test
+	@Transactional
+	public void testCascadeDeleteOrder() {
+		Customer c2 = new Customer();
+		c2.setContactName("Klaudia");
+		c2.addOrder(new Order());
+		customerDao.save(c2);
+		assertEquals(1, orderDao.getAll().size());
+		customerDao.delete(c2);
+		assertEquals(0, orderDao.getAll().size());
+	}
 }

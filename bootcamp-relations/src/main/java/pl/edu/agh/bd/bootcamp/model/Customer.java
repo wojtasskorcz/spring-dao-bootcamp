@@ -1,10 +1,15 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,12 +26,18 @@ public class Customer {
 	private String country;
 	private String phone;
 	private String fax;
+	private List<Order> orders = new ArrayList<Order>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	public Long getCustomerId() {
 		return customerId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Column
@@ -66,8 +77,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "{customerId: " + customerId + ", contactName: " + contactName
-				+ "}";
+		return "{customerId: " + customerId + ", contactName: " + contactName + "}";
 	}
 
 	public void setPostalCode(String postalCode) {
@@ -124,5 +134,17 @@ public class Customer {
 
 	public void setFax(String fax) {
 		this.fax = fax;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public void addOrder(Order order) {
+		this.orders.add(order);
+	}
+
+	public void removeOrder(Order order) {
+		this.orders.remove(order);
 	}
 }

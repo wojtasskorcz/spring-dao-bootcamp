@@ -23,6 +23,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="annotatedClasses">
 			<list>
 				<value>pl.edu.agh.bd.bootcamp.model.Customer</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Order</value>
 			</list>
 		</property>
 
