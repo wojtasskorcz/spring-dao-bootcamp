@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,7 +19,9 @@ import javax.persistence.Table;
 @Table(name = "Orders")
 public class Order {
 	private Long orderId;
-	private Long employeeId;
+	private Customer customer;
+	private Employee employee;
+	private Shipper shipper;
 	private Date orderDate;
 	private Date requiredDate;
 	private Date shippedDate;
@@ -38,18 +42,32 @@ public class Order {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "orderId")
 	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "customerId")
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "employeeId")
+	public Employee getEmployee() {
+		return employee;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "shipVia")
+	public Shipper getShipper() {
+		return shipper;
 	}
 
 	@Column
 	public Date getOrderDate() {
 		return orderDate;
-	}
-
-	@Column
-	public Long getEmployeeId() {
-		return employeeId;
 	}
 
 	@Column
@@ -126,13 +144,17 @@ public class Order {
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	public void setEmployeeId(Long employeeId) {
-		this.employeeId = employeeId;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public void setRequiredDate(Date requiredDate) {
@@ -161,5 +183,9 @@ public class Order {
 
 	public void addOrderDetails(OrderDetails orderDetails) {
 		this.orderDetails.add(orderDetails);
+	}
+
+	public void setShipper(Shipper shipper) {
+		this.shipper = shipper;
 	}
 }

@@ -5,15 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Products")
 public class Product {
 	private Long productId;
 	private String productName;
-	// private Long supplierId;
-	// private Long categoryId;
+	private Supplier supplier;
+	private Category category;
 	private Double quantityPerUnit;
 	private Double unitPrice;
 	private Integer unitsInStock;
@@ -26,6 +28,18 @@ public class Product {
 	@Column
 	public Long getProductId() {
 		return productId;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "supplierId")
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	public Category getCategory() {
+		return category;
 	}
 
 	@Column
@@ -93,5 +107,23 @@ public class Product {
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Product && this.productId.equals(((Product) obj).productId);
+	}
+
+	@Override
+	public int hashCode() {
+		return productId.intValue();
 	}
 }

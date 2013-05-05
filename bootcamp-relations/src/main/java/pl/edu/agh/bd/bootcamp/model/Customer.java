@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +30,7 @@ public class Customer {
 	private String phone;
 	private String fax;
 	private List<Order> orders = new ArrayList<Order>();
+	private List<CustomerDemographics> customerDemographics = new ArrayList<CustomerDemographics>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +39,19 @@ public class Customer {
 		return customerId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
 	public List<Order> getOrders() {
 		return orders;
+	}
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+        name="CustomerCustomerDemographics",
+        joinColumns=@JoinColumn(name="customerId"),
+        inverseJoinColumns=@JoinColumn(name="customerTypeId")
+    )
+	public List<CustomerDemographics> getCustomerDemographics() {
+		return customerDemographics;
 	}
 
 	@Column
@@ -147,4 +161,19 @@ public class Customer {
 	public void removeOrder(Order order) {
 		this.orders.remove(order);
 	}
+
+	public void setCustomerDemographics(List<CustomerDemographics> customerDemographics) {
+		this.customerDemographics = customerDemographics;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Customer && this.customerId.equals(((Customer) obj).customerId);
+	}
+
+	@Override
+	public int hashCode() {
+		return customerId.intValue();
+	}
+	
 }

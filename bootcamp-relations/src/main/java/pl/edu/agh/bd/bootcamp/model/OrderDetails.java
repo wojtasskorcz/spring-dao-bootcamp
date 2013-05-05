@@ -1,10 +1,12 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,7 +26,8 @@ public class OrderDetails {
 		return orderDetailsId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "productId")
 	public Product getProduct() {
 		return product;
 	}
@@ -62,5 +65,15 @@ public class OrderDetails {
 
 	public void setOrderDetailsId(Long id) {
 		this.orderDetailsId = id;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof OrderDetails && this.orderDetailsId.equals(((OrderDetails) obj).orderDetailsId);
+	}
+
+	@Override
+	public int hashCode() {
+		return orderDetailsId.intValue();
 	}
 }

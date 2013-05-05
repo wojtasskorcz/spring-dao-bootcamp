@@ -26,6 +26,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<value>pl.edu.agh.bd.bootcamp.model.Order</value>
 				<value>pl.edu.agh.bd.bootcamp.model.OrderDetails</value>
 				<value>pl.edu.agh.bd.bootcamp.model.Product</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Employee</value>
+				<value>pl.edu.agh.bd.bootcamp.model.CustomerDemographics</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Shipper</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Territory</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Region</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Supplier</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Category</value>
 			</list>
 		</property>
 

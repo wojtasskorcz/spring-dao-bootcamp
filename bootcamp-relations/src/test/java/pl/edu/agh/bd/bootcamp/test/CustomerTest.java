@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,7 @@ public class CustomerTest extends CustomHibernateTestSupport {
 	private CustomerDao customerDao;
 	@Autowired
 	private OrderDao orderDao;
-	@Autowired
-	private SessionFactory sessionFactory;
-
+	
 	@Before
 	public void setUp() {
 		Customer c1 = new Customer();
