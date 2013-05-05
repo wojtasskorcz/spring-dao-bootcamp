@@ -1,5 +1,6 @@
 package pl.edu.agh.bd.bootcamp.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,13 +31,13 @@ public class Product {
 		return productId;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "supplierId")
 	public Supplier getSupplier() {
 		return supplier;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId")
 	public Category getCategory() {
 		return category;

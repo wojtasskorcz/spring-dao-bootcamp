@@ -26,7 +26,7 @@ public class OrderDetails {
 		return orderDetailsId;
 	}
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "productId")
 	public Product getProduct() {
 		return product;

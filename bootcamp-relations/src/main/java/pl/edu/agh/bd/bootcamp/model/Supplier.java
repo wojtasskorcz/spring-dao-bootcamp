@@ -9,16 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Customers")
-public class Customer {
-	private Long customerId;
+@Table(name = "Suppliers")
+public class Supplier {
+	
+	private Long supplierId;
+	private List<Product> products = new ArrayList<Product>();
 	private String companyName;
 	private String contactName;
 	private String contactTitle;
@@ -29,56 +28,45 @@ public class Customer {
 	private String country;
 	private String phone;
 	private String fax;
-	private List<Order> orders = new ArrayList<Order>();
-	private List<CustomerDemographics> customerDemographics = new ArrayList<CustomerDemographics>();
-
+	private String homePage;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
-	public List<Order> getOrders() {
-		return orders;
+	public Long getSupplierId() {
+		return supplierId;
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-        name="CustomerCustomerDemographics",
-        joinColumns=@JoinColumn(name="customerId"),
-        inverseJoinColumns=@JoinColumn(name="customerTypeId")
-    )
-	public List<CustomerDemographics> getCustomerDemographics() {
-		return customerDemographics;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "supplier")
+	public List<Product> getProducts() {
+		return products;
 	}
-
+	
 	@Column
 	public String getCompanyName() {
 		return companyName;
 	}
-
+	
 	@Column
 	public String getContactName() {
 		return contactName;
 	}
-
+	
 	@Column
 	public String getContactTitle() {
 		return contactTitle;
 	}
-
+	
 	@Column
 	public String getAddress() {
 		return address;
 	}
-
+	
 	@Column
 	public String getCity() {
 		return city;
 	}
-
+	
 	@Column
 	public String getRegion() {
 		return region;
@@ -89,91 +77,74 @@ public class Customer {
 		return postalCode;
 	}
 
-	@Override
-	public String toString() {
-		return "{customerId: " + customerId + ", contactName: " + contactName + "}";
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
+	@Column
 	public String getCountry() {
 		return country;
 	}
 
+	@Column
 	public String getPhone() {
 		return phone;
 	}
 
+	@Column
 	public String getFax() {
 		return fax;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	@Column
+	public String getHomePage() {
+		return homePage;
 	}
-
+	
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-
 	public void setContactTitle(String contactTitle) {
 		this.contactTitle = contactTitle;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 	public void setRegion(String region) {
 		this.region = region;
 	}
-
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public void addOrder(Order order) {
-		this.orders.add(order);
-	}
-
-	public void removeOrder(Order order) {
-		this.orders.remove(order);
-	}
-
-	public void setCustomerDemographics(List<CustomerDemographics> customerDemographics) {
-		this.customerDemographics = customerDemographics;
+	public void setHomePage(String homePage) {
+		this.homePage = homePage;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Customer && this.customerId.equals(((Customer) obj).customerId);
+		return obj instanceof Supplier && this.supplierId.equals(((Supplier) obj).supplierId);
 	}
 
 	@Override
 	public int hashCode() {
-		return customerId.intValue();
+		return supplierId.intValue();
 	}
-	
+
 }

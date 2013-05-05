@@ -47,19 +47,19 @@ public class Order {
 		return orderDetails;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	public Customer getCustomer() {
 		return customer;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employeeId")
 	public Employee getEmployee() {
 		return employee;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shipVia")
 	public Shipper getShipper() {
 		return shipper;
