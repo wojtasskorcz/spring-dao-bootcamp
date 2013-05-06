@@ -46,7 +46,7 @@ public class Order {
 	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	public Customer getCustomer() {
@@ -58,7 +58,7 @@ public class Order {
 	public Employee getEmployee() {
 		return employee;
 	}
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shipVia")
 	public Shipper getShipper() {
@@ -144,8 +144,9 @@ public class Order {
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
-	
-	public void setCustomer(Customer customer) {
+
+	// Rozwiązanie problemu I
+	void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 

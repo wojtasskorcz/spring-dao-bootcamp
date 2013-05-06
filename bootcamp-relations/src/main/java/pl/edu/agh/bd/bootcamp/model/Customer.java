@@ -43,13 +43,9 @@ public class Customer {
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-        name="CustomerCustomerDemographics",
-        joinColumns=@JoinColumn(name="customerId"),
-        inverseJoinColumns=@JoinColumn(name="customerTypeId")
-    )
+	@JoinTable(name = "CustomerCustomerDemographics", joinColumns = @JoinColumn(name = "customerId"), inverseJoinColumns = @JoinColumn(name = "customerTypeId"))
 	public List<CustomerDemographics> getCustomerDemographics() {
 		return customerDemographics;
 	}
@@ -154,8 +150,13 @@ public class Customer {
 		this.orders = orders;
 	}
 
+	// Rozwiązanie problemu I
 	public void addOrder(Order order) {
+		if (order.getCustomer() != null && !order.getCustomer().equals(this)) {
+			throw new IllegalArgumentException("Invalid order");
+		}
 		this.orders.add(order);
+		order.setCustomer(this);
 	}
 
 	public void removeOrder(Order order) {
@@ -165,7 +166,7 @@ public class Customer {
 	public void setCustomerDemographics(List<CustomerDemographics> customerDemographics) {
 		this.customerDemographics = customerDemographics;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Customer && this.customerId.equals(((Customer) obj).customerId);
@@ -175,5 +176,5 @@ public class Customer {
 	public int hashCode() {
 		return customerId.intValue();
 	}
-	
+
 }

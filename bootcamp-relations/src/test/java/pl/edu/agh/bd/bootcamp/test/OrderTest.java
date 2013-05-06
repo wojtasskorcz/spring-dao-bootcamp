@@ -68,4 +68,18 @@ public class OrderTest extends CustomHibernateTestSupport {
 		orderDao.save(order);
 		assertEquals(1, productDao.getAll().size());
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	@Transactional
+	public void testInconsistency() {
+		Customer c1 = new Customer();
+		c1.setContactName("Aga");
+		Order order = new Order();
+		order.setShipName("Niepołomice");
+		c1.addOrder(order);
+		customerDao.save(c1);
+		Customer c2 = new Customer();
+		c2.setContactName("XXXX");
+		c2.addOrder(order);
+	}
 }
