@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+
+		<property name="annotatedClasses">
+			<list>
+				<value>pl.edu.agh.bd.bootcamp.model.Customer</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Order</value>
+				<value>pl.edu.agh.bd.bootcamp.model.OrderDetails</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Product</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Employee</value>
+				<value>pl.edu.agh.bd.bootcamp.model.CustomerDemographics</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Shipper</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Territory</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Region</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Supplier</value>
+				<value>pl.edu.agh.bd.bootcamp.model.Category</value>
+			</list>
+		</property>
+
+	</bean>
+</beans>
