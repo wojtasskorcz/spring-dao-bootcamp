@@ -53,7 +53,7 @@ public class DataGeneratorImpl implements DataGenerator {
 	private EmployeeDao employeeDao;
 
 	@Override
-	public void generateCustomers(int n) {
+	public void generateCustomers(int n, int nDemographics) {
 		for (int i = 0; i < n; i++) {
 			Customer customer = new Customer();
 			customer.setContactName(GenerationUtil.getContact());
@@ -62,7 +62,7 @@ public class DataGeneratorImpl implements DataGenerator {
 			customer.setCompanyName(GenerationUtil.getCompany());
 			customer.setContactTitle(GenerationUtil.getTitle());
 			customer.setCountry(GenerationUtil.getCountry());
-			customer.setCustomerDemographics(GenerationUtil.pickSome(customerDemographicsDao.getAll(), 3));
+			customer.setCustomerDemographics(GenerationUtil.pickSome(customerDemographicsDao.getAll(), nDemographics));
 			customer.setFax(GenerationUtil.getPhone());
 			customer.setPhone(GenerationUtil.getPhone());
 			customer.setRegion(GenerationUtil.getRegion());
@@ -211,7 +211,7 @@ public class DataGeneratorImpl implements DataGenerator {
 	@Override
 	public void generateDatabase(double scalingFactor) {
 		generateCustomerDemographics((int) (10 * scalingFactor));
-		generateCustomers((int) (300 * scalingFactor));
+		generateCustomers((int) (300 * scalingFactor), (int) (5 * scalingFactor));
 		generateShippers((int) (10 * scalingFactor));
 		generateCategories((int) (50 * scalingFactor));
 		generateSuppliers((int) (70 * scalingFactor));

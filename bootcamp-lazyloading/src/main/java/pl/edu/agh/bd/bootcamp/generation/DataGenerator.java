@@ -1,7 +1,7 @@
 package pl.edu.agh.bd.bootcamp.generation;
 
 public interface DataGenerator {
-	void generateCustomers(int n);
+	void generateCustomers(int n, int nDemographics);
 
 	void generateShippers(int size);
 
