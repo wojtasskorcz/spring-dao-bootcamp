@@ -45,7 +45,7 @@ public class Customer {
 		return orders;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "CustomerCustomerDemographics", joinColumns = @JoinColumn(name = "customerId"), inverseJoinColumns = @JoinColumn(name = "customerTypeId"))
 	public List<CustomerDemographics> getCustomerDemographics() {
 		return customerDemographics;

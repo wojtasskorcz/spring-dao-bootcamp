@@ -32,9 +32,9 @@ public class LazyLoadingTest extends CustomHibernateTestSupport {
 	@Transactional
 	public void testGetAllDependencies() {
 		dataGenerator.generateCustomerDemographics(10);
-		int ncustomers = 100;
-		int nToGet = 100;
-		dataGenerator.generateCustomers(ncustomers, 10);
+		int ncustomers = 300;
+		int nToGet = 300;
+		dataGenerator.generateCustomers(ncustomers, 3);
 		sessionFactory.getCurrentSession().flush();
 		sessionFactory.getCurrentSession().clear();
 		System.out.println("~~~~~~~~~~~~~~~~~~");
