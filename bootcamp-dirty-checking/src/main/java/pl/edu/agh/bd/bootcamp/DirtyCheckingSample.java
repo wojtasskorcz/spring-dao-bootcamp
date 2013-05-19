@@ -9,5 +9,6 @@ public class DirtyCheckingSample {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("config/BeanLocations.xml");
 		DirtyBean dirtyBean = (DirtyBean) appContext.getBean("dirtyBean");
 		dirtyBean.incrementQuantity();
+		dirtyBean.detachedIncrementQuantity();
 	}
 }
